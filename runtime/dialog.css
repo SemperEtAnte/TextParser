@@ -1,0 +1,9 @@
+#collButton:hover, #closeButton:hover
+{
+    -fx-text-fill: #eeb81a;
+}
+
+.button
+{
+    -fx-cursor: hand;
+}
