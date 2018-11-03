@@ -1,4 +1,4 @@
-package ru.SemperAnte.TestParser;
+package ru.SemperAnte.TextParser;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
