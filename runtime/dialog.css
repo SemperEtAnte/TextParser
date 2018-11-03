@@ -1,9 +1,43 @@
-#collButton:hover, #closeButton:hover
+.button:default:hover
 {
-    -fx-text-fill: #eeb81a;
+    -fx-background-color: #f57f17;
+}
+.button:default
+{
+    -fx-text-fill: black;
+    -fx-background-color: #f9a825;
+}
+#closeButton, #collButton
+{
+    -fx-background-color: #242424;
 }
 
+#ClearButton
+{
+    -fx-background-color: #424242;
+    -fx-text-fill: white;
+}
+#ClearButton:hover
+{
+
+    -fx-background-color: #f57f17;
+    -fx-text-fill: black;
+}
+
+#closeButton:hover, #collButton:hover
+{
+    -fx-text-fill: #f9a825;
+}
+
+#AnchorPane
+{
+    -fx-background-color: #242424;
+}
 .button
 {
     -fx-cursor: hand;
+    -fx-border: none;
+    -fx-border-radius: 0px;
+    -fx-background-radius: 0px;
 }
+

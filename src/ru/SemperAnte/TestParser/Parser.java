@@ -4,19 +4,17 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-public class Parser
+public final class Parser
 {
-    String parseFromString(String str, String from, String to) throws UnsupportedEncodingException
+    public static String parseFromString(String str, String from, String to) throws UnsupportedEncodingException
     {
         String s = new String(str.getBytes(from), to);
         ArrayList strings = new ArrayList(Arrays.asList(s.split("\n")));
         return parseText(strings);
     }
 
-    private String parseText(List<String> lines)
+    public static  String parseText(List<String> lines)
     {
             for (int i = 0; i < lines.size() - 1; ++i)
             {
@@ -105,19 +103,6 @@ public class Parser
                     }
                 }
 
-//                if(!isNormalEnd(ln))
-//                {
-//                    StringBuilder sb = new StringBuilder(ln);
-//                    for(int j = i+1; j<lines.size(); ++j)
-//                    {
-//                        String ln2 = lines.get(j);
-//                        sb.append(" ").append(ln2);
-//                        lines.remove(j);
-//                        if(isNormalEnd(ln2))
-//                            break;
-//                    }
-//                    lines.set(i, sb.toString());
-//                }
             }
 
         List<Integer> toAdd = new ArrayList<>();
@@ -154,11 +139,7 @@ public class Parser
         }
         return sb.toString();
     }
-    boolean isNormalEnd(String ln)
-    {
-        return ln.endsWith("\\.") || ln.endsWith("\\?") || ln.endsWith("\\!") || ln.endsWith("\\:");
-    }
-    private String replaceBigSpaces(String line)
+    public static String replaceBigSpaces(String line)
     {
         int length = line.length();
         line = line.replaceAll("  ", " ");
@@ -169,4 +150,16 @@ public class Parser
         }
         return line;
     }
+    public static String toOneLineAll(String text)
+    {
+        return replaceBigSpaces(text.replaceAll("\n", " "));
+    }
+    public static String removeWiki(String text)
+    {
+        return replaceBigSpaces(text.replaceAll("\\[\\d*\\]", ""));
+    }
+    public static String removeBraces(String text)
+	 {
+	 	 return replaceBigSpaces(text.replaceAll("\\{.*\\}",""));
+	 }
 }

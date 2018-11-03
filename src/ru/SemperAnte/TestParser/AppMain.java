@@ -43,23 +43,26 @@ public class AppMain extends Application
     private void initTextAreas()
     {
         input = (TextArea) root.lookup("#textInput");
-        output = (TextArea) root.lookup("#textOutput");
+        output = (TextArea) root.lookup("#textInput");
 
     }
 
     private double X;
     private double Y;
-
     private void initButtons()
     {
         Button collapse = (Button) root.lookup("#collButton");
         Button close = (Button) root.lookup("#closeButton");
-        System.out.println("BUTTTON = " + collapse);
         Button go = (Button) root.lookup("#goButton");
         Button copy = (Button) root.lookup("#copyButton");
         Button goWithout = (Button) root.lookup("#goWithoutEnc");
+        Button removeWiki =  (Button) root.lookup("#removeWiki");
+        Button removeFig =  (Button) root.lookup("#removeFig");
+        Button allInOne = (Button) root.lookup("#allInOne");
+        Button clearButton = (Button) root.lookup("#ClearButton");
         close.setOnAction(event -> Platform.exit());
         collapse.setOnAction((event) -> stage.setIconified(true));
+        clearButton.setOnAction((event)->input.clear());
         copy.setOnAction((event) ->
         {
             ClipboardContent cn = new ClipboardContent();
@@ -67,7 +70,6 @@ public class AppMain extends Application
             cn.putString(output.getText());
             Clipboard.getSystemClipboard().setContent(cn);
         });
-        Parser parser = new Parser();
         go.setOnAction((event) ->
         {
             String text = input.getText();
@@ -76,7 +78,7 @@ public class AppMain extends Application
 
             try
             {
-                output.setText(parser.parseFromString(text, "Windows-1252", "Windows-1251"));
+                output.setText(Parser.parseFromString(text, "Windows-1252", "Windows-1251"));
             } catch (UnsupportedEncodingException e)
             {
                 output.setText("Какая-то ошибочка вышла =( \n" + e.getMessage());
@@ -90,11 +92,33 @@ public class AppMain extends Application
 
             try
             {
-                output.setText(parser.parseFromString(text, "UTF-8", "UTF-8"));
+                output.setText(Parser.parseFromString(text, "UTF-8", "UTF-8"));
             } catch (Exception e)
             {
                 output.setText("Какая-то ошибочка вышла =( \n" + e.getMessage());
             }
+        });
+
+        removeWiki.setOnAction((event)->
+        {
+            String text = input.getText();
+            if(text == null)
+                return;
+            output.setText(Parser.removeWiki(text));
+        });
+        removeFig.setOnAction((event)->
+        {
+            String text = input.getText();
+            if(text ==null)
+                return;
+            output.setText(Parser.removeBraces(text));
+        });
+        allInOne.setOnAction((event)->
+        {
+            String text = input.getText();
+            if(text == null)
+                return;
+            output.setText(Parser.toOneLineAll(text));
         });
         root.setOnMousePressed(event ->
         {
