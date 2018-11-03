@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="TextParser">
+    <output-path>$PROJECT_DIR$/out/artifacts/TextParser</output-path>
+    <root id="archive" name="TextParser.jar">
+      <element id="module-output" name="TextParser" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>
